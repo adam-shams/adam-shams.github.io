@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Adam Shams</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Adam Shams</a>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="goals.html">Goals</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><button class="theme-toggle" aria-label="Toggle theme">&#9790;</button></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="page-header">
+    <h1>Technical Projects</h1>
+    <p>A selection of projects spanning AI/ML, data infrastructure, IoT, and research.</p>
+  </div>
+
+  <section class="section">
+    <div class="project-detail" style="border-style: dashed;">
+      <h3>&#128736; Discovery Project (ECE 1100)</h3>
+      <p>Currently in progress — details will be added before the Discovery Project Showcase deadline.</p>
+      <div class="tags">
+        <span class="tag">Coming Soon</span>
+      </div>
+    </div>
+
+    <div class="project-detail">
+      <h3>&#127973; Bio-MIBLab — Natural-Language ICU Heart-Rate Interpretation (Fall 2025)</h3>
+      <img src="assets/images/BioMib.png" alt="Bio-MIBLab Research" style="width:100%;border-radius:8px;margin:0.75rem 0 1rem;">
+      <p>Undergraduate research at Georgia Tech &amp; Emory School of Medicine under PI Dr. May Wang. Built an end-to-end clinical Q&amp;A system that answers natural-language questions about ICU patients — e.g., "How is patient 10011 doing today?" — by combining three components: a natural-language–to–SQL (NL→SQL) agent over MIMIC-III ICU data, a daily feature engine that summarizes heart-rate time series into clinically meaningful statistics, and a retrieval-augmented generation (RAG) layer grounded in ACLS guidelines and medical literature.</p>
+      <p>A key challenge was trust: LLMs can silently generate plausible-looking but incorrect SQL. To address this, I built a SQL benchmark harness that compares the agent's queries against a deterministic baseline, evaluating row-level recall and precision, per-metric deltas, and data quality flags. On a representative case (subject 10011), the system correctly retrieved 27 heart-rate rows, computed a full daily feature profile (mean ≈ 59.5 bpm, median 57 bpm, gentle downward trend), and answered follow-up clinical questions with explicit citations to ACLS bradycardia algorithms.</p>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">RAG</span>
+        <span class="tag">NL→SQL</span>
+        <span class="tag">LLMs</span>
+        <span class="tag">MIMIC-III</span>
+        <span class="tag">BM25</span>
+        <span class="tag">Healthcare</span>
+        <span class="tag">Research</span>
+      </div>
+    </div>
+
+    <div class="project-detail">
+      <h3>&#128172; Research Presentations at ENDO 2025</h3>
+      <img src="assets/images/ENDO 2025.png" alt="ENDO 2025 Conference" style="width:100%;border-radius:8px;margin:0.75rem 0 1rem;">
+      <p><strong>First Author — Diabetes Risks:</strong> Led all technical development. Built custom healthcare chatbot pipelines using top LLMs combined with RAG. Benchmarked results using BERTScore, ROUGE, and BLEU metrics to evaluate factual accuracy and clinical relevance.</p>
+      <p><strong>Co-Author — Thyroid Eye Disease:</strong> Evaluated LLM accuracy on clinical queries. Collaborated with a 10-member interdisciplinary team spanning medicine and computer science.</p>
+      <div class="tags">
+        <span class="tag">LLMs</span>
+        <span class="tag">RAG</span>
+        <span class="tag">BERTScore</span>
+        <span class="tag">Healthcare</span>
+        <span class="tag">Research</span>
+      </div>
+    </div>
+
+    <div class="project-detail">
+      <h3>&#129302; Open-Sourced AI-Powered Multi-Agent Debate &amp; Learning Platform</h3>
+      <p>A multi-agent debate platform built with LLMs and the Langroid framework in Python. The system simulates structured debates between users and AI agents on AI ethics topics. Each agent is prompt-engineered and role-tuned, with support for OpenAI, Google, and Mistral models. The platform integrates neural search for real-time web references and includes a dedicated feedback and evaluation agent.</p>
+      <p>This project was contributed to open source and is now <strong>part of the official Langroid framework</strong> under the MIT license. It was featured on the Langroid Blog and highlighted by contributors on LinkedIn.</p>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">Langroid</span>
+        <span class="tag">OpenAI</span>
+        <span class="tag">Gemini</span>
+        <span class="tag">Mistral</span>
+        <span class="tag">Open Source</span>
+      </div>
+    </div>
+
+    <div class="project-detail">
+      <h3>&#129657; Factually Consistent AFib Q&amp;A using LLMs</h3>
+      <p>A medical chatbot designed for AFib (atrial fibrillation) patients and medical students, grounded in Stanford Healthcare and American Heart Association sources. Uses document parsing, relevance extraction, and vectorization (Qdrant DB) for accurate, factually consistent responses. Supports GPT-4 and Gemini models. Built with Langroid and Python to bridge complex medical information and accessible user-facing insights.</p>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">Langroid</span>
+        <span class="tag">GPT-4</span>
+        <span class="tag">Gemini</span>
+        <span class="tag">Qdrant</span>
+        <span class="tag">Healthcare</span>
+      </div>
+    </div>
+
+    <div class="project-detail">
+      <h3>🎥 Apple Apprenticeship — AI-Powered Dorm Room Security System (Summer 2024)</h3>
+      <p>Built with a team of 3 during Apple's Engineering Camp II. The system detects guns, rifles, and fire in real time using YOLOv5 computer vision. Hardware includes a Raspberry Pi Zero 2 W, Camera Module 3, and SparkFun ENS160/BME280 environmental sensors.</p>
+      <p>The YOLOv5 model was trained on 15,700 images using AWS EC2, PyTorch, and a CSPDarknet53 + PANet architecture. A companion iOS app (Swift) provides live video streaming, playback, environmental data monitoring, and hazard notifications. The project was presented to multiple Apple SVPs.</p>
+      <div class="tags">
+        <span class="tag">YOLOv5</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">AWS EC2</span>
+        <span class="tag">Raspberry Pi</span>
+        <span class="tag">Swift</span>
+        <span class="tag">iOS</span>
+      </div>
+    </div>
+
+    <div class="project-detail">
+      <h3>&#128663; Tire-Road Coefficient of Friction Analysis</h3>
+      <p>Measured friction coefficients for a 2004 Lexus GX470 using OBD-II deceleration data. Python scripts calculate real-time acceleration from vehicle speed data and perform statistical analysis. Results: &mu; = 0.0465 (neutral coasting) and &mu; = 0.485 (braking), consistent with expected values for rubber-on-asphalt contact.</p>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">OBD-II</span>
+        <span class="tag">Physics</span>
+        <span class="tag">Data Analysis</span>
+      </div>
+    </div>
+
+    <div class="project-detail">
+      <h3>&#129504; Multivariable Calculus &amp; Linear Algebra Applications in ML</h3>
+      <p>Built and trained a convolutional neural network from scratch in Python to classify handwritten digits. The project emphasizes the mathematical foundations of machine learning — specifically how multivariable calculus (gradient descent, backpropagation) and linear algebra (matrix operations, transformations) underpin neural network training. Demonstrated mathematical optimization techniques that measurably improved network performance.</p>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">CNN</span>
+        <span class="tag">Linear Algebra</span>
+        <span class="tag">Calculus</span>
+      </div>
+    </div>
+
+    <div class="project-detail">
+      <h3>&#128209; Linear Algebra Library (PyLAP)</h3>
+      <p>A comprehensive Python linear algebra library built entirely from scratch without NumPy. Designed for educational purposes, PyLAP demonstrates the inner workings of linear algebra computations — from basic matrix operations to eigenvalue decomposition. Accompanied by a written paper explaining the mathematical theory and implementation decisions.</p>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">Linear Algebra</span>
+        <span class="tag">Education</span>
+      </div>
+    </div>
+
+    <div class="project-detail">
+      <h3>&#127757; Apple Apprenticeship — CO2 Odometer (Summer 2023)</h3>
+      <video controls style="width:100%;border-radius:8px;margin:0.75rem 0 1rem;">
+        <source src="assets/images/Apple 2023.mp4" type="video/mp4">
+      </video>
+      <p>An OBD-II port integration that measures live vehicle carbon emissions in real time. Built with a team of 5 during Apple's Engineering Technology Camp. The companion iOS app displays real-time and lifetime emission data, gamified to encourage eco-friendly driving habits. Presented to Apple executive leadership.</p>
+      <div class="tags">
+        <span class="tag">OBD-II</span>
+        <span class="tag">Swift</span>
+        <span class="tag">iOS</span>
+      </div>
+    </div>
+
+    <div class="project-detail">
+      <h3>&#128202; Large-Scale Online Chess Game Data Infrastructure &amp; Analytics</h3>
+      <img src="assets/images/Chess.png" alt="Chess Data Infrastructure" style="width:100%;border-radius:8px;margin:0.75rem 0 1rem;">
+      <p>An ETL pipeline in Python that processes over 100 million online chess games. Data is stored in TiDB (a distributed SQL database) with AWS S3 for object storage and EC2 for compute. Statistical analysis performed in R identifies player performance patterns, rating trends, and game outcome correlations across massive datasets.</p>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">R</span>
+        <span class="tag">SQL</span>
+        <span class="tag">TiDB</span>
+        <span class="tag">AWS S3</span>
+        <span class="tag">AWS EC2</span>
+      </div>
+    </div>
+
+    <div class="project-detail">
+      <h3>&#128218; Calculus Educational Chatbot</h3>
+      <p>A calculus tutoring chatbot built in Python using LangChain and GPT-3.5. The bot responds to student prompts grounded in targeted calculus documents, ensuring accurate and relevant answers. The user interface was built with Gradio, providing an accessible and interactive experience for students learning calculus concepts.</p>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">LangChain</span>
+        <span class="tag">GPT-3.5</span>
+        <span class="tag">Gradio</span>
+        <span class="tag">RAG</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  &copy; 2026 Adam Shams. Built with HTML, CSS &amp; JS.
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
