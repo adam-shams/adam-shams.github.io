@@ -1,2 +1,2 @@
-# adams-shams.github.io
+# adam-shams.github.io
 personal website
