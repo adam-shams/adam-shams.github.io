@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discovery Project — Adam Shams</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Adam Shams</a>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="goals.html">Goals</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><button class="theme-toggle" aria-label="Toggle theme">&#9790;</button></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="container">
+  <section class="hero">
+    <h1>&#127944; Discovery Project</h1>
+    <p class="subtitle">CFB Play-Call Tendency Analyzer — a Streamlit web app that surfaces situational play-calling patterns for any Power-5 college football team using live data from the College Football Data API and LLM-generated scouting reports.</p>
+    <div class="hero-links">
+      <a href="https://cfb-playcall-tendencies.streamlit.app" target="_blank" rel="noopener" class="btn btn-primary">View Live Demo &#8599;</a>
+      <a href="https://github.com/adam-shams/CFB-Play-Tendencies" target="_blank" rel="noopener" class="btn btn-secondary">GitHub Repo &#8599;</a>
+      <a href="projects.html" class="btn btn-secondary">All Projects</a>
+    </div>
+  </section>
+
+  <!-- Project at a Glance -->
+  <section class="section">
+    <h2>Project at a Glance</h2>
+    <div class="bio-text" style="margin-top: 1rem;">
+      <p>The CFB Play-Call Tendency Analyzer is a Streamlit application that pulls play-by-play data from the College Football Data (CFBD) API and lets the user slice an offense's tendencies across down, distance, field zone, score situation, and quarter. It generates run/pass distributions, play-type frequency charts, field-position breakdowns, and AI-written scouting summaries — turning hundreds of thousands of raw play records into something a coach, analyst, or any curious fan can actually read.</p>
+    </div>
+    <div class="tags" style="margin-top: 1rem;">
+      <span class="tag">Python</span>
+      <span class="tag">Streamlit</span>
+      <span class="tag">CFBD API</span>
+      <span class="tag">Groq / Llama-3.1</span>
+      <span class="tag">Ollama</span>
+      <span class="tag">JSON Cache</span>
+      <span class="tag">LLM Prompt Engineering</span>
+      <span class="tag">Data Analysis</span>
+    </div>
+  </section>
+
+  <!-- Live Demo -->
+  <section class="section">
+    <h2>Live Demo</h2>
+    <div style="margin-top: 1rem; border-radius: 8px; overflow: hidden; border: 1px solid var(--border, #e5e5e5);">
+      <iframe
+        src="https://cfb-playcall-tendencies.streamlit.app/?embed=true"
+        title="CFB Play-Call Tendency Analyzer"
+        style="width: 100%; height: 720px; border: 0; display: block;"
+        loading="lazy"
+        allow="clipboard-write"
+      ></iframe>
+    </div>
+  </section>
+
+  <!-- The Idea -->
+  <section class="section">
+    <h2>The Idea</h2>
+    <div class="bio-text" style="margin-top: 1rem;">
+      <p>I've gotten a lot more into college football since coming to GT and one of the things that always fascinated me is how much of the game lives below the surface — coaches script openings, lean on certain tendencies on third down, and call dramatically different plays inside their own 10 versus the red zone. That information exists in public play-by-play data, but it's locked inside hundreds of thousands of rows that nobody is going to scroll through and I wanted a clear way to visualize the patterns.</p>
+      <p>From there the goal was to build a tool that anyone could open in a browser, pick a team and a season, and get a real read on how that offense actually behaves in certain conditions. I wanted to combine clean data engineering with LLMs to help summarize raw stats into language a person can act on.</p>
+    </div>
+  </section>
+
+  <!-- Project Progress -->
+  <section class="section">
+    <h2>Project Progress</h2>
+    <div class="bio-text" style="margin-top: 1rem;">
+      <p><strong>Scoping &amp; data exploration.</strong> I started by exploring the College Football Data API to understand what the play endpoints actually return — fields like down, distance, yards-to-goal, play type, score, and quarter. I scoped to Power-5 teams and seasons 2021–2025 to keep the data volume reasonable.</p>
+      <p><strong>Caching layer.</strong> Pulling a full season of plays for every interaction was painfully slow, so I added a local JSON cache keyed by team and season. After the first fetch, every subsequent filter is instant. This was one of the most satisfying improvements to make — going from a 10+ second wait to a snappy interaction.</p>
+      <p><strong>Modular analysis engine.</strong> I broke the logic into <code>fetch_plays.py</code>, <code>filter_plays.py</code>, <code>analyze_plays.py</code>, and <code>summarize.py</code>, with a shared <code>utils/constants.py</code> for things like field zones (Pinned Deep, Own Territory, Midfield, Opponent Territory, Red Zone) and score-situation buckets. Keeping these layers separate made it much easier to test a piece in isolation.</p>
+      <p><strong>Streamlit UI.</strong> The interface lets the user pick a team, a season range, and apply granular filters (down, distance to first, yards-to-goal, score differential, quarter). Output includes run/pass splits, play-type frequency, field-zone breakdowns, the most common down/distance/zone combinations, and a CSV export of the filtered plays.</p>
+      <p><strong>LLM scouting reports.</strong> I integrated Groq (Llama-3.1-8b-instant) as the default backend with optional local Ollama support, prompting the model to produce a short, analytical 3–4 sentence scouting summary from the computed statistics.</p>
+      <p><strong>Deployment.</strong> The app is deployed on Streamlit Community Cloud so anyone can use it without installing anything locally.</p>
+    </div>
+  </section>
+
+  <!-- Successes and Failures -->
+  <section class="section">
+    <h2>Successes &amp; Failures</h2>
+    <div class="bio-text" style="margin-top: 1rem;">
+      <p><strong>Success — caching.</strong> Adding the JSON cache was the biggest single win in the project. It transformed the experience from long wait times every time to fetching once and then explore freely, and it made the LLM scouting reports feel responsive enough to actually be useful.</p>
+      <p><strong>Success — modular architecture.</strong> Splitting the codebase into small, single-purpose modules (<code>fetch</code>, <code>filter</code>, <code>analyze</code>, <code>summarize</code>) paid off every time I needed to add a feature or debug. I could change the field-zone definitions without touching the LLM code, or swap the LLM backend without touching the analysis layer.</p>
+      <p><strong>Failure / lesson — context limits.</strong> My first attempt at the AI scouting report dumped the full filtered play list into the prompt. The model either ran out of context or produced vague, generic output. I had to redesign the summarization step to feed the LLM the <em>computed statistics</em> (percentages, averages, top combinations) instead of raw plays — a cleaner abstraction and a much better summary.</p>
+      <p><strong>Failure / lesson — UI iteration.</strong> The first version of the Streamlit UI tried to show every filter and every chart on one screen and was overwhelming. I had to step back and reorganize sections so the app reads top-to-bottom in a logical order: pick team -> see overall splits -> drill into situations -> read the summary.</p>
+    </div>
+  </section>
+
+  <!-- ECE Skills Gained -->
+  <section class="section">
+    <h2>ECE Skills Gained</h2>
+    <div class="bio-text" style="margin-top: 1rem;">
+      <p>This project pushed me on the <strong>computing systems</strong> and <strong>information internetworks</strong> sides of ECE. I got to play around more with data analytics and visualizations as even though this wasn't my original project idea that was always the core of my inital pitch. Plus it fits with threads such as Distributed Systems + Signal and information processing:</p>
+      <ul>
+        <li><strong>API integration &amp; data engineering:</strong> Working with a real public API (CFBD), handling pagination, and designing a caching layer that respects rate limits.</li>
+        <li><strong>System decomposition:</strong> Splitting a non-trivial program into clean modules with well-defined responsibilities — the same architectural thinking that shows up in digital design and embedded systems.</li>
+        <li><strong>LLM prompt engineering:</strong> Learning when to send raw data vs. pre-computed features to a model, and how to constrain output length and tone.</li>
+        <li><strong>Cloud deployment:</strong> Deploying to Streamlit Community Cloud, managing secrets (API keys), and configuring the runtime.</li>
+        <li><strong>UI/UX iteration:</strong> Treating the user interface as a real engineering problem — what to show, in what order, with what defaults.</li>
+        <li><strong>Version control discipline:</strong> Using Git/GitHub to manage incremental changes and keep the project deployable at every step.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Final Thoughts -->
+  <section class="section">
+    <h2>Final Thoughts</h2>
+    <div class="bio-text" style="margin-top: 1rem;">
+      <p>This project reinforced my interest in the computing-systems side of ECE. I came in already excited about LLMs and ML, but the parts I enjoyed most were the ugly parts: getting the cache right, structuring the modules, deciding what the LLM should and shouldn't see. Those are the skills that make the ML layer actually work in production.</p>
+      <p>The next thing I want to do is finish the <strong>MCP (Model Context Protocol) capabilities</strong> — exposing the analysis tools (<code>fetch_plays</code>, <code>filter_plays</code>, <code>analyze_plays</code>, <code>summarize</code>) as a proper MCP server so that Claude, Cursor, or any MCP-compatible client can call them directly. That turns the analyzer from a single Streamlit app into a reusable backend making it so you can basically "chat" with the product.</p>
+      <p>Other potential next steps are: defensive tendency analysis (right now it's offense-only), opponent-adjusted stats, multi-game trend lines, and expanding beyond Power-5. I'd also like to experiment with smaller local models via Ollama to see how close they can get to the Groq-hosted reports without the network round-trip.</p>
+      <p>More broadly, the Discovery Project format gave me space to scope, build, ship, and reflect on something I cared about in a low pressure setting and it surfaced exactly the kind of full-stack ECE work I want to do more of.</p>
+    </div>
+  </section>
+
+  <!-- Screenshot -->
+  <section class="section">
+    <h2>Screenshot</h2>
+    <img src="assets/images/cfb example.png" alt="CFB Play-Call Tendency Analyzer — example view" style="width: 100%; border-radius: 8px; border: 1px solid var(--border, #e5e5e5); margin-top: 1rem;">
+  </section>
+</main>
+
+<footer class="footer">
+  &copy; 2026 Adam Shams. Built with HTML, CSS &amp; JS.
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
